@@ -1,0 +1,21 @@
+syntax = "proto3";
+
+option java_multiple_files = true;
+option java_package = "billing";
+
+service BillingService{
+  rpc CreateBillingAccount (BillingRequest) returns(BillingResponse);
+}
+
+// Unique field numbers used to identify fields in the binary data.
+// CRITICAL: Never change these numbers once deployed, or it will break backwards compatibility.
+// Numbers 1-15 take 1 byte to encode (use for most frequent fields)
+message BillingRequest{
+  string patientId = 1;
+  string name = 2;
+  string email = 3;
+}
+message BillingResponse{
+  string accountId = 1;
+  string status = 2;
+}

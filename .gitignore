@@ -1,0 +1,27 @@
+### IDE / IntelliJ ###
+.idea/
+*.iml
+*.iws
+.settings/
+.vscode/
+
+### Maven / Compiled Data ###
+target/
+*.class
+*.jar
+*.war
+dependency-reduced-pom.xml
+
+### Application Logs & Temp Files ###
+*.log
+*.txt
+hs_err_pid*
+*.pid
+
+### OS Generated Files ###
+.DS_Store
+Thumbs.db
+
+### AWS CDK (Crucial for the next step of your video) ###
+cdk.out/
+.cdk.staging/
