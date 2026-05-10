@@ -1,13 +1,11 @@
-### Creates a new patient entity
-POST http://localhost:4000/patients
+POST http://lb-72649560.elb.localhost.localstack.cloud:4004/api/patients
 Content-Type: application/json
+Authorization: Bearer {{token}}
 
 {
-  "name": "John Doe with a billing account",
-  "email": "test_billing_accoutttnt147892@example.com",
-  "address": "123 main street22",
-  "dateOfBirth": "1995-09-09",
+  "name": "Jane Doe",
+  "email": "janedoe1223233@example.com",
+  "address": "456 main street",
+  "dateOfBirth": "1990-01-01",
   "registeredDate": "2024-11-28"
 }
-
-###

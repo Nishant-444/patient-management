@@ -3,8 +3,10 @@ package com.pm.patientservice.grpc;
 import billing.BillingRequest;
 import billing.BillingResponse;
 import billing.BillingServiceGrpc;
+import com.pm.patientservice.exception.BillingServiceException;
 import io.grpc.ManagedChannel;
 import io.grpc.ManagedChannelBuilder;
+import io.grpc.StatusRuntimeException;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Value;
@@ -35,9 +37,15 @@ public class BillingServiceGrpcClient {
             .setEmail(email)
             .build();
 
-    BillingResponse response = blockingStub.createBillingAccount(request);
-    log.info("Received response from billing service via GRPC: {}", response);
-
-    return response;
+    try {
+      BillingResponse response = blockingStub.createBillingAccount(request);
+      log.info("Received response from billing service via GRPC: {}", response);
+      return response;
+    } catch (StatusRuntimeException e) {
+      log.error("gRPC call to billing service failed for patientId={}: status={}",
+              patientId, e.getStatus(), e);
+      throw new BillingServiceException(
+              "Failed to create billing account for patientId=" + patientId, e);
+    }
   }
 }
